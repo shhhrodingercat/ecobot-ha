@@ -4,7 +4,7 @@ DB_FILENAME = "seta.db"
 CONF_ZONA = "zona"
 CONF_CALENDAR = "create_calendar"
 
-PLATFORMS = ["sensor", "binary_sensor", "calendar"]
+PLATFORMS = ["sensor", "calendar"]
 
 # Mapping colonne DB → nomi leggibili
 RIFIUTI: dict[str, str] = {
@@ -14,6 +14,15 @@ RIFIUTI: dict[str, str] = {
     "v": "Vetro e Alluminio",
     "p": "Plastica",
     "s": "Sfalci",
+}
+
+RIFIUTI_ICON: dict[str, str] = {
+    "i": "mdi:trash-can",
+    "o": "mdi:food-apple",
+    "c": "mdi:newspaper-variant",
+    "v": "mdi:bottle-wine",
+    "p": "mdi:cup",
+    "s": "mdi:grass",
 }
 
 # Mapping codice DB → nome leggibile per il config flow

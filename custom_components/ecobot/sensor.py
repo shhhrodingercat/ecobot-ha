@@ -3,10 +3,11 @@ from datetime import date
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, RIFIUTI, CONF_ZONA
+from .const import DOMAIN, RIFIUTI, RIFIUTI_ICON, CONF_ZONA, ZONE_LABELS
 from .coordinator import EcobotCoordinator
 
 
@@ -24,8 +25,19 @@ async def async_setup_entry(
     )
 
 
+def _device_info(zona: str) -> DeviceInfo:
+    label = ZONE_LABELS.get(zona, zona)
+    return DeviceInfo(
+        identifiers={(DOMAIN, zona)},
+        name=f"EcoBot – {label}",
+        manufacturer="Seta S.p.a.",
+        model="Raccolta Differenziata",
+        entry_type="service",
+    )
+
+
 class EcobotDateSensor(CoordinatorEntity, SensorEntity):
-    """Sensore che mostra la prossima data di raccolta per un tipo di rifiuto."""
+    """Sensore con la prossima data di raccolta per un tipo di rifiuto."""
 
     _attr_device_class = SensorDeviceClass.DATE
 
@@ -37,10 +49,13 @@ class EcobotDateSensor(CoordinatorEntity, SensorEntity):
         nome: str,
     ) -> None:
         super().__init__(coordinator)
+        label = ZONE_LABELS.get(zona, zona)
         self._zona = zona
         self._col = col
-        self._attr_name = f"EcoBot {zona} {nome}"
+        self._attr_name = f"{nome}"
         self._attr_unique_id = f"ecobot_{zona}_{col}_prossima"
+        self._attr_icon = RIFIUTI_ICON.get(col, "mdi:recycle")
+        self._attr_device_info = _device_info(zona)
 
     @property
     def native_value(self) -> date | None:

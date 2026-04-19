@@ -6,8 +6,9 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, RIFIUTI, CONF_ZONA, CONF_CALENDAR
+from .const import DOMAIN, RIFIUTI, CONF_ZONA, CONF_CALENDAR, ZONE_LABELS
 from .coordinator import EcobotCoordinator
+from .sensor import _device_info
 
 
 async def async_setup_entry(
@@ -26,15 +27,17 @@ async def async_setup_entry(
 class EcobotCalendar(CoordinatorEntity, CalendarEntity):
     """Calendario con tutti i ritiri della raccolta differenziata."""
 
+    _attr_icon = "mdi:recycle"
+
     def __init__(self, coordinator: EcobotCoordinator, zona: str) -> None:
         super().__init__(coordinator)
         self._zona = zona
-        self._attr_name = f"EcoBot {zona}"
+        self._attr_name = "Calendario Raccolta"
         self._attr_unique_id = f"ecobot_calendar_{zona}"
+        self._attr_device_info = _device_info(zona)
 
     @property
     def event(self) -> CalendarEvent | None:
-        """Restituisce il prossimo evento imminente."""
         eventi = self.coordinator.data.get("eventi_futuri", [])
         if not eventi:
             return None
