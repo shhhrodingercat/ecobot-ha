@@ -1,11 +1,11 @@
 {
   "domain": "ecobot",
   "name": "EcoBot Raccolta Differenziata",
-  "version": "1.0.1",
+  "codeowners": ["@shhhrodingercat"],
   "config_flow": true,
   "documentation": "https://github.com/shhhrodingercat/ecobot-ha",
+  "iot_class": "local_polling",
   "issue_tracker": "https://github.com/shhhrodingercat/ecobot-ha/issues",
-  "codeowners": ["@shhhrodingercat"],
   "requirements": [],
-  "iot_class": "local_polling"
+  "version": "1.0.1"
 }
