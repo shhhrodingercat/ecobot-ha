@@ -1,0 +1,17 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configura zona",
+        "description": "Seleziona il tuo Comune o Zona e scegli se creare un'entità calendario.",
+        "data": {
+          "zona": "Comune / Zona",
+          "create_calendar": "Crea calendario raccolta"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Questa zona è già configurata"
+    }
+  }
+}
