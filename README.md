@@ -103,7 +103,7 @@ Questo progetto è personale e non ha alcuna affiliazione ufficiale con Seta S.p
 
 Se ti è utile e vuoi contribuire ai costi di sviluppo e manutenzione:
 
-[![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ecobot)
+[![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/shhhrodingercat)
 
 ---
 
